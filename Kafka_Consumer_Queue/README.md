@@ -6,7 +6,7 @@ In messagging systems, there are two entities :
 Kafka has taken this to a level of abstraction where there are no two entities. There is only one entity named as topic. On the consumer side, there are consumer group. If you want use Kafka for queueing model then you can have a consumers which subscribe to a topic have same consumer group id.
 Only one (any one) consumers which belong to consumer group can consume the message.
 If you want to use Kafka for topic model then you can have each consumer should have different consumer group id. That means all consumers will receive the message i.e publish-subscribed mode.    
-This class demonstrates Kafka usage for queue modeling. All the consumers use the belong to the same consumer group id. User can start the KafkaQueueConsumer from different hosts just to simulate production kind of scenario. User can just fork different Java processes on the same machine. Only one consumer will receive the message. Multiple consumers which belong to same consumer group are used for fault tolerance in case one consumer process is crashed and the other purpose is parallelism.
+This class demonstrates Kafka usage for queue modeling. All the consumers use the belong to the same consumer group id. You can start the KafkaQueueConsumer from different hosts just to simulate production kind of scenario. You can just fork different Java processes on the same machine. Only one consumer will receive the message. Multiple consumers which belong to same consumer group are used for fault tolerance in case one consumer process is crashed and the other purpose is parallelism.
 
 ### How to build?
 
