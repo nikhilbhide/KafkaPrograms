@@ -11,8 +11,8 @@ public class KafkaQueueConsumerTest {
 	public void testQueueConsumer() throws InterruptedException, ExecutionException {
 		KafkaDataProducer producer = new KafkaDataProducer();
 		KafkaQueueConsumer consumer = new KafkaQueueConsumer(2,1000);
-		consumer.start(10);
+		consumer.start(10,false);
 		producer.produceData(1);
-		assertEquals(consumer.start(10),1);
+		assertEquals(consumer.start(10,false),1);
 	}
 }

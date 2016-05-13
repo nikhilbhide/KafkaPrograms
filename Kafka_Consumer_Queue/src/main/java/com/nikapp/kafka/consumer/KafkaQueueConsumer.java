@@ -43,7 +43,8 @@ public class KafkaQueueConsumer {
 	
 	/**
 	 * Creates Kafka consumer based on the properties set.
-	 * The properties should be configured in properties file; however, over here properties are hardcoded since it is a demonstration project. 
+	 * The properties should be configured in properties file; however, over here properties are hardcoded since it is a demonstration project.
+	 *  
 	 * 
 	 */
 	private void init(int consumerId, int timeOut) {
@@ -63,11 +64,9 @@ public class KafkaQueueConsumer {
 	}
 
 	/**
-	 * Creates Kafka consumer based on the properties set.
-	 * The properties should be configured in properties file; however, over here properties are hardcoded since it is a demonstration project. 
-	 * 
-	 */
-	public int start(int timeOut) throws InterruptedException, ExecutionException {
+	 * Starts kafka consumer to fetch the messages.
+	 */ 
+	public int start(int timeOut, boolean closeAfterExecution) throws InterruptedException, ExecutionException {
 		ThreadPoolExecutor executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(totalNumOfConsumers);
 		List<Future<Boolean>> resultList = new ArrayList<>();
 		kafkaConsumerTasks.forEach(
@@ -85,6 +84,10 @@ public class KafkaQueueConsumer {
 					}})
 				.collect(Collectors.toList()).size();
 		executor.shutdown();
+		if(closeAfterExecution) {
+			kafkaConsumerTasks.parallelStream()
+							  .forEach(kafkaConsumerTask-> kafkaConsumerTask.getConsumer().close());
+		}
 		return successfulAcks;
 	}
 }

@@ -45,11 +45,16 @@ public class KafkaDataProducer {
 	*/	
 	public void produceData(int totalMessagesToSend) {
 		init();
+		try {
 		IntStream.rangeClosed(1, totalMessagesToSend)
 		.parallel()
 		.forEach(i-> {
 			System.out.println("Sending message on Kafka topic");
 			kafkaProducer.send(new ProducerRecord<String, String>("Kafka-Topic", "This is message number ".concat(String.valueOf(i))));
 		});
+		}
+		finally {
+			kafkaProducer.close();
+		}
 	}
 }

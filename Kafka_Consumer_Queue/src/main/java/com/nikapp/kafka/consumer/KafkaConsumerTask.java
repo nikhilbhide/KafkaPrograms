@@ -13,6 +13,7 @@ import org.apache.kafka.clients.consumer.KafkaConsumer;
  */
 
 public class KafkaConsumerTask implements Callable {
+	
 	private int consumerId;
 	private KafkaConsumer<String, String> consumer;
 	private long timeOut;
@@ -23,6 +24,12 @@ public class KafkaConsumerTask implements Callable {
 		this.timeOut=timeOut;
 	}
 	
+	/**
+	 * @return the consumer
+	 */
+	public KafkaConsumer<String, String> getConsumer() {
+		return consumer;
+	}
 	
 	/**
 	 * Implementation of KafkaConsumerTask Callable. It tries to consume the message from Kafka topic.
@@ -37,8 +44,8 @@ public class KafkaConsumerTask implements Callable {
 		ConsumerRecords<String,String> records = consumer.poll(timeOut);
 		records.forEach(record -> {
 			System.out.println("Consumer " + consumerId + " consumed the messaged with offset " + record.offset());
-			consumer.commitSync();
 		});
+
 		if(records.count()>0) 
 			return true;
 		else 
