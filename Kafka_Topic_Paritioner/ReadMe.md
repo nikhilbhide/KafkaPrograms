@@ -1,6 +1,7 @@
 ###Kafka_Topic_Paritioner
 This program provides custom partitioner for Kafka topic while producing message onto it.
-#How do I choose the number of partitions for a topic?
+
+###How do I choose the number of partitions for a topic?
 Partition count determines the maximum consumer parallelism.
 one should set a partition count based on the maximum consumer parallelism you would expect to need (i.e. over-provision).
 Clusters with up to 10k total partitions are quite workable. 
