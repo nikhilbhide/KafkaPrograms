@@ -6,3 +6,6 @@ This is a Kafka consumer which consumes data from queue. This consumer is exampl
 
 ###Kafka_Consumer_Topic
 This is a Kafka consumer which consumes data from topic. This consumer is example of topic.
+
+###Kafka_Topic_Paritioner
+Custom paritioner for topic while producing messages onto Kafka topic.
